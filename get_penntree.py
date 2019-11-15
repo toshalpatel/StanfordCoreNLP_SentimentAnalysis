@@ -32,7 +32,10 @@ time.sleep(2)
 data['penn_t'] = data['text'].apply(lambda row:get_clean_text(row))
 
 for i in data.index:
-    data.loc[i,'penn_t'] = get_pennt(data.loc[i,'text'])
+    try:
+        data.loc[i,'penn_t'] = get_pennt(data.loc[i,'text'])
+    except:
+        continue
     
 print(data['penn_t'])
 data.to_csv("combined_sentences_141119_with_penn.csv", index=None)
